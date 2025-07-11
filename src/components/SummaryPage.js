@@ -1,10 +1,8 @@
-import React from "react";
-
 export function SummaryPage({ formData, preview, onBack, onSubmit }) {
   return (
-    <>
-      {onSubmit ? " ":<h2>Summary</h2>}
-      <ul style={{ listStyle: "none", padding: 0 }}>
+    <div className="summary-container">
+      {onSubmit ? " " : <h2>Summary</h2>}
+      <ul>
         <li>
           <strong>Username:</strong> {formData.username}
         </li>
@@ -43,8 +41,7 @@ export function SummaryPage({ formData, preview, onBack, onSubmit }) {
           </li>
         )}
       </ul>
-      {/* {onBack && <button onClick={onBack}>⬅ Back</button>} */}
       {onSubmit && <button onClick={onSubmit}>✅ Submit</button>}
-    </>
+    </div>
   );
 }

@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Step1Personal from "./components/Step1Personal";
@@ -83,14 +82,14 @@ function App() {
       formData.username.length < 4 ||
       formData.username.includes(" ")
     ) {
-      errs.username = "username require";
+      errs.username = "Username is required";
     }
     if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errs.email = "email require";
+      errs.email = "Valid email required";
     }
     if (formData.newPassword && formData.password) {
       if (formData.newPassword !== formData.password)
-        errs.password = "Password is not matched";
+        errs.password = "Passwords do not match";
       if (!formData.password) errs.password = "Current password required";
       if (!/^(?=.*[!@#$%^&*])(?=.*\d).{8,}$/.test(formData.newPassword))
         errs.newPassword = "Weak password";
@@ -99,13 +98,13 @@ function App() {
     if (step === 2) {
       if (!formData.profession) errs.profession = "Profession is required";
       if (formData.profession === "Entrepreneur" && !formData.company)
-        errs.company = "Company required";
-      if (!formData.addressLine1) errs.addressLine1 = "Address required";
+        errs.company = "Company name required";
+      if (!formData.addressLine1) errs.addressLine1 = "Address is required";
     }
     if (step === 3) {
-      if (!formData.country) errs.country = "Country required";
-      if (!formData.state) errs.state = "State required";
-      if (!formData.city) errs.city = "City required";
+      if (!formData.country) errs.country = "Country is required";
+      if (!formData.state) errs.state = "State is required";
+      if (!formData.city) errs.city = "City is required";
     }
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -114,6 +113,7 @@ function App() {
   const next = () => {
     if (validate()) setStep(step + 1);
   };
+
   const Prev = () => {
     setStep(step - 1);
   };
@@ -162,20 +162,25 @@ function App() {
       </header>
 
       <div className="stepper-wrapper">
-        <aside className="stepper-sidebar">
-          <div className={`step ${step === 1 ? "active" : ""}`}>
-            1 <span>Personal Info</span>
+        <div className="stepper-top">
+          <div className="stepper-container">
+            {[1, 2, 3, 4].map((num, idx) => (
+              <div
+                key={idx}
+                className={`step-item ${step >= num ? "active" : ""}`}
+              >
+                <div className="step-dot">{num}</div>
+                <div className="step-label">
+                  {
+                    ["Personal Info", "Professional", "Preferences", "Summary"][
+                      idx
+                    ]
+                  }
+                </div>
+              </div>
+            ))}
           </div>
-          <div className={`step ${step === 2 ? "active" : ""}`}>
-            2 <span>Professional</span>
-          </div>
-          <div className={`step ${step === 3 ? "active" : ""}`}>
-            3 <span>Preferences</span>
-          </div>
-          <div className={`step ${step === 4 ? "active" : ""}`}>
-            4 <span>Summary</span>
-          </div>
-        </aside>
+        </div>
 
         <div className="form-container">
           {submitted ? (
@@ -212,19 +217,32 @@ function App() {
                 />
               )}
 
-          
-              <div className="sub-btn">
-                  {step === 4 && (
-                <SummaryPage
-                  formData={formData}
-                  preview={preview}
-                  // onBack={() => setStep(3)}
-                  onSubmit={submit}
-                />
+              {step === 4 ? (
+                <>
+                  <SummaryPage formData={formData} preview={preview} />
+                  <div className="form-buttons">
+                    <button className="prev-btn" onClick={Prev}>
+                      ⬅ Prev
+                    </button>
+                    <button className="next-btn" onClick={submit}>
+                      ✅ Submit
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="form-buttons">
+                    {step > 1 && (
+                      <button className="prev-btn" onClick={Prev}>
+                        ⬅ Prev
+                      </button>
+                    )}
+                    <button className="next-btn" onClick={next}>
+                      Next ➡
+                    </button>
+                  </div>
+                </>
               )}
-                {step < 4 && <button onClick={next}>Next</button>}
-                {step > 1 && <button onClick={Prev}>Prev</button>}
-              </div>
             </>
           )}
         </div>

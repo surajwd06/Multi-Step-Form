@@ -1,19 +1,10 @@
-/* styles.css */
-
+/* === Base === */
 body {
   margin: 0;
   font-family: "Segoe UI", sans-serif;
   background-color: #f5f7fa;
   color: #333;
-}
-
-.app-container {
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 20px;
-  background: #fff;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
+  box-sizing: border-box;
 }
 
 h2 {
@@ -21,9 +12,34 @@ h2 {
   color: #0066cc;
 }
 
+/* === Container Layouts === */
+.app-container,
+.container,
+.summary-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.container {
+  max-width: 600px;
+}
+
+@media (max-width: 768px) {
+  .app-container,
+  .container,
+  .summary-container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+}
+
+/* === Form Elements === */
 input,
-select,
-button {
+select {
   display: block;
   width: 100%;
   padding: 10px;
@@ -45,18 +61,30 @@ select:focus {
   box-shadow: 0 0 5px rgba(0, 102, 204, 0.3);
 }
 
+/* === Buttons === */
 button {
   background-color: #0066cc;
   color: #fff;
   font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background-color 0.3s;
 }
 
 button:hover {
   background-color: #0057b8;
 }
 
+@media (max-width: 768px) {
+  button {
+    width: 100%;
+  }
+}
+
+/* === Error Message === */
 .error {
   color: red;
   font-size: 0.875rem;
@@ -64,20 +92,139 @@ button:hover {
   margin-bottom: 10px;
 }
 
+/* === Images === */
 img {
   margin-top: 10px;
   border-radius: 6px;
+  max-width: 100%;
+  height: auto;
 }
 
+/* === List Reset === */
 ul {
   padding-left: 0;
+  list-style: none;
 }
 
 ul li {
   margin-bottom: 8px;
+  font-size: 1rem;
+  color: #444;
 }
-.container {
-  width: 50%;
-  margin: 0 auto;
-  padding: 20px;
+
+strong {
+  font-weight: 600;
+  color: #222;
+}
+
+/* === Plan Radio Options === */
+.plan-options {
+  display: flex;
+  gap: 2rem;
+  margin: 1rem 0;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.plan-options label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* === Newsletter Checkbox === */
+.newsletter-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 1rem;
+}
+
+.newsletter-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* === Summary Page Specific === */
+.summary-container h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.summary-container button {
+  background-color: #6200ea;
+  margin-top: 2rem;
+}
+
+.summary-container button:hover {
+  background-color: #3700b3;
+}
+
+@media (max-width: 768px) {
+  .summary-container h2 {
+    font-size: 1.25rem;
+  }
+
+  .summary-container li {
+    font-size: 0.95rem;
+  }
+
+  .summary-container img {
+    max-width: 250px;
+  }
+}
+
+
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-buttons button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  min-width: 120px;
+}
+
+.prev-btn {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.prev-btn:hover {
+  background-color: #ccc;
+}
+
+.next-btn {
+  background-color: #0066cc;
+  color: white;
+}
+
+.next-btn:hover {
+  background-color: #0057b8;
+}
+
+@media (max-width: 768px) {
+  .form-buttons {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .form-buttons button {
+    width: 100%;
+  }
 }

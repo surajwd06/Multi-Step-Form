@@ -31,7 +31,8 @@ function App() {
   const [cities, setCities] = useState([]);
   const [submitted, setSubmitted] = useState(false);
 
-  const api = "https://interview-39d5.onrender.com/api";
+  // const api = "https://interview-39d5.onrender.com/api";
+  const api = "https://multi-step-form-hgl3.onrender.com/api";
 
   useEffect(() => {
     axios.get(`${api}/countries`).then((res) => setCountries(res.data));

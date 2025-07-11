@@ -1,7 +1,10 @@
+
 .app-wrapper {
   display: flex;
   flex-direction: column;
   font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background: #f9f9f9;
 }
 
 .app-header {
@@ -10,39 +13,78 @@
   padding: 1rem;
   text-align: center;
 }
-
-.stepper-wrapper {
+.stepper-top {
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 1rem;
   display: flex;
-  flex-direction: row;
-  min-height: 100vh;
+  justify-content: center;
 }
 
-.stepper-sidebar {
-  background-color: #eee;
-  padding: 1rem;
-  width: 220px;
+.stepper-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  width: 100%;
+  position: relative;
+}
+
+.step-item {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  position: relative;
+  flex: 1;
+  text-align: center;
 }
 
-.step {
-  padding: 0.75rem;
-  border-radius: 8px;
-  background: #ccc;
+.step-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 15px;
+  right: -50%;
+  width: 100%;
+  height: 2px;
+  background-color: #ccc;
+  z-index: 0;
 }
 
-.step.active {
-  background: #6200ea;
+.step-item.active:not(:last-child)::after {
+  background-color: #6200ea;
+}
+
+.step-dot {
+  width: 30px;
+  height: 30px;
+  background-color: #ccc;
+  border-radius: 50%;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  z-index: 1;
+  transition: background-color 0.3s;
 }
 
+.step-item.active .step-dot {
+  background-color: #6200ea;
+}
+
+.step-label {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
 .form-container {
-  flex: 1 1;
-  padding: 0 2rem;
-  background: #fafafa;
+  max-width: 900px;
+  margin: 2rem auto;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
-
 input,
 select,
 button {
@@ -52,6 +94,7 @@ button {
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 6px;
+  font-size: 1rem;
 }
 
 button {
@@ -59,47 +102,46 @@ button {
   color: white;
   border: none;
   cursor: pointer;
-  width: 25%;
+  width: 150px;
+  transition: background-color 0.3s;
 }
 
 button:hover {
   background: #3700b3;
 }
 
+.sub-btn {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
 @media (max-width: 768px) {
-  .stepper-wrapper {
-    flex-direction: column;
+  .stepper-container {
+    align-items: flex-start;
+    gap: 1rem;
   }
 
-  .stepper-sidebar {
-    overflow-x: auto;
-    width: 100%;
-    padding: 1rem 0;
+  .step-item:not(:last-child)::after {
+    display: none;
   }
 
   .form-container {
+    margin: 1rem;
     padding: 1rem;
   }
 
-  .step {
-    flex: 1;
-    text-align: center;
+  .step-label {
+    font-size: 0.8rem;
   }
-}
 
-.sub-btn {
-  display: flex;
-  flex-direction: row-reverse;
-  align-content: flex-start;
-  justify-content: flex-end;
-  align-items: flex-end;
-  flex-wrap: wrap;
-      display: flex
-;
-    flex-direction: row-reverse;
-    align-content: flex-start;
-    justify-content: flex-end;
-    align-items: flex-end;
-    gap: 50%;
+  button {
+    width: 100%;
+  }
 
+  .sub-btn {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
 }
